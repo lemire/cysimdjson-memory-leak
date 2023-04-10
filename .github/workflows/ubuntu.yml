@@ -10,8 +10,8 @@ jobs:
       - name: Install cysimdjson 
         run: pip install cysimdjson
       - name: Run script
-        run: python3 main.py 
-      - name: valgrind python3 main.py
-        uses: solareenlo/42valgrind-action@v1.0.3
-        with:
-          flags: "python3 main.py"
+        run: python3 main.py
+      - name: valgrind
+        run: |
+          sudo apt-get install -y valgrind
+          valgrind -v --leak-check=full --show-leak-kinds=all python3 main.py
