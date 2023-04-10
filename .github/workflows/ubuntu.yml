@@ -1,0 +1,18 @@
+name: Ubuntu 22.04 CI
+
+on: [push, pull_request]
+
+jobs:
+  ubuntu-build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install cysimdjson 
+        run: pip install cysimdjson
+      - name: Run script under valgrind
+        run: valgrind python3 main.py > valgrind_report.txt
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        with:
+          name: valgrind_report
+          path: valgrind_report.txt
