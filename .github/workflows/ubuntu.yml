@@ -9,10 +9,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install cysimdjson 
         run: pip install cysimdjson
-      - name: Run script under valgrind
-        run: valgrind python3 main.py > valgrind_report.txt
-      - name: Upload report
-        uses: actions/upload-artifact@v3
+      - name: Run script
+        run: python3 main.py 
+      - name: valgrind python3 main.py
+        uses: solareenlo/42valgrind-action@v1.0.3
         with:
-          name: valgrind_report
-          path: valgrind_report.txt
+          flags: "python3 main.py"
